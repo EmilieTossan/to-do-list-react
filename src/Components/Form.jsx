@@ -89,7 +89,6 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
                     return res.json();
                 })
                 .then(data => {
-                    console.log("Tâche ajoutée avec succès", data);
                     onTaskAdded(data);
                     navigate('/');
                 })
@@ -190,7 +189,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
                     <td>Date :</td>
                     <td>
                         <input
-                            type="text"
+                            type="date"
                             placeholder="dd/mm/aaaa (facultative)"
                             value={ date }
                             onChange={(e) => setDate(() => e.target.value)}
@@ -201,7 +200,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
                     <td>Heure :</td>
                     <td>
                         <input
-                            type="text"
+                            type="time"
                             placeholder="hh:mm (facultative)"
                             value={ time }
                             onChange={(e) => setTime(() => e.target.value)}
