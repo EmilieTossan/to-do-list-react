@@ -1,6 +1,6 @@
 import "./App.css";
-import DashBoard from "./Components/DashBoard.jsx";
-import Form from "./Components/Form.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import Form from "./pages/Form.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 
@@ -43,7 +43,7 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <DashBoard
+                        <Dashboard
                             tasks={ tasks }
                             filtered={ filter }
                             onFiltered={(newFilter) => setFilter(newFilter)}

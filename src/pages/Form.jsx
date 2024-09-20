@@ -10,6 +10,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
     const [time, setTime] = useState("");
     const [priority, setPriority] = useState("");
     const [fulfillment, setFulfillment] = useState(0);
+    
     const [errName, setErrName] = useState("");
     const [errCategory, setErrCategory] = useState("");
     const [errPriority, setErrPriority] = useState("");

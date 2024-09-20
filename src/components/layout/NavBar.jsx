@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import FilterButton from "./FilterButton.jsx";
+import FilterButton from "../shared/FilterButton.jsx";
 
 export default function NavBar({ filtered, onFiltered }) {
     return (
