@@ -33,13 +33,13 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
         e.preventDefault();
 
         setErrName(() =>
-            name == "" ? "Choisissez un nom pour la to-do" : ""
+            name === "" ? "Choisissez un nom pour la to-do" : ""
         );
         setErrCategory(() =>
-            category == "" ? "Choisissez une catégorie pour la to-do" : ""
+            category === "" ? "Choisissez une catégorie pour la to-do" : ""
         );
         setErrPriority(() =>
-            priority == "" ? "Choisissez une priorité pour la to-do" : ""
+            priority === "" ? "Choisissez une priorité pour la to-do" : ""
         );
 
         const taskData = {
@@ -52,7 +52,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
             fulfillment: Number(fulfillment)
         };
 
-        if (name != "" && category != "" && priority != "") {
+        if (name !== "" && category !== "" && priority !== "") {
 
             if (taskToEdit) {
 

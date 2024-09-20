@@ -124,11 +124,13 @@ tr {
     text-align: center;
 }
 
-input, select {
+input,
+select {
     padding: 5px;
 }
 
-input, textarea {
+input,
+textarea {
     width: 80%;
 }
 
