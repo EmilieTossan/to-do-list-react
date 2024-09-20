@@ -55,16 +55,17 @@ function App() {
                 <Route
                     path="/newtask"
                     element={
-                    <Form />}
+                    <Form
+                      onTaskAdded=
+                       {(newTask) =>
+                         setTasks(prevTasks =>
+                           [...prevTasks, newTask])}
+                     />}
                  />
                  <Route
                    path="/edittask/:id"
                    element={
                      <Form
-                       onTaskAdded=
-                         {(newTask) =>
-                           setTasks(prevTasks =>
-                             [...prevTasks, newTask])}
                        taskToEdit={ taskToEdit }
                        onTaskUpdated=
                          {(updatedTask) =>

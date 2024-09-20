@@ -38,7 +38,7 @@ export default function TasksList({ tasks, onEdit, onDelete }) {
                                     src="/icon/delete.svg"
                                     width={17}
                                     onClick={() => onDelete(task.id)}
-                                  />
+                                 />
                             </div>
                         </td>
                     </tr>

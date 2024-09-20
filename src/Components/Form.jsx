@@ -89,6 +89,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
                     return res.json();
                 })
                 .then(data => {
+                    console.log("Tâche ajoutée avec succès", data);
                     onTaskAdded(data);
                     navigate('/');
                 })
