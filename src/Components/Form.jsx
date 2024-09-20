@@ -14,6 +14,13 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
     const [errCategory, setErrCategory] = useState("");
     const [errPriority, setErrPriority] = useState("");
 
+    const formatDateToFrench = (isoDate) => {
+        const [year, month, day] = isoDate.split('-');
+        return `${day}.${month}.${year}`;
+    };
+
+    const formattedDate = date ? formatDateToFrench(date) : "";
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -46,7 +53,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
             name,
             description,
             category,
-            date,
+            date: formattedDate,
             time,
             priority,
             fulfillment: Number(fulfillment)

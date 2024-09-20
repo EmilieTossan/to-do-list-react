@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(180deg, rgba(75, 120, 235, 1) 0%, rgba(25, 40, 75, 1) 100%);
+    background: linear-gradient(rgb(75, 120, 235), rgb(25, 40, 75));
     min-height: 90vh;
 }
 
