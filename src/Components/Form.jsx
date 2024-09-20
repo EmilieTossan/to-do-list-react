@@ -56,24 +56,24 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
 
             if (taskToEdit) {
 
-              fetch(`http://localhost:3000/tasks/${taskToEdit.id}`, {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify(taskData)
-              })
-              .then(res => {
-                if (!res.ok) throw new Error("Erreur modification tâche");
-                return res.json();
-              })
-              .then((updatedTask) => {
-                onTaskUpdated(updatedTask);
-                navigate('/');
-              })
-              .catch(
-                err => console.error(err)
-              );
+                fetch(`http://localhost:3000/tasks/${taskToEdit.id}`, {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(taskData)
+                })
+                .then(res => {
+                    if (!res.ok) throw new Error("Erreur modification tâche");
+                    return res.json();
+                })
+                .then(updatedTask => {
+                    onTaskUpdated(updatedTask);
+                    navigate('/');
+                })
+                .catch(
+                    err => console.error(err)
+                );
 
             } else {
 
@@ -92,9 +92,9 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
                     onTaskAdded(data);
                     navigate('/');
                 })
-                .catch(err => {
-                    console.error(err);
-                })
+                .catch(
+                    err => console.error(err)
+                );
             }
         }
     }
