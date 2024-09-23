@@ -18,11 +18,21 @@ export default function TasksList({ tasks, onEdit, onDelete }) {
             <tbody>
                 { tasks.map((task) => (
                     <tr className="tasks" id={ task.id }>
-                        <td>{ task.name }</td>
-                        <td>{ task.description }</td>
-                        <td>{ task.category }</td>
-                        <td>{ task.date }<br />{ task.time }</td>
-                        <td>{ task.priority }</td>
+                        <td>{ task.name ? task.name : "-" }</td>
+                        <td>{ task.description ? task.description : "-" }</td>
+                        <td>{ task.category ? task.category : "-" }</td>
+                        <td>
+                            { task.date ? 
+                                <>
+                                    { new Date(task.date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }
+                                    <br />
+                                    { task.time }
+                                </>
+                                : "-" 
+                            }
+                            
+                        </td>
+                        <td>{ task.priority ? task.priority : "-" }</td>
                         <td>{ task.fulfillment }%</td>
                         <td className="ud-icons">
                             <div className="ud-icons-container">

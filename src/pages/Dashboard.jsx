@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import NavBar from "../components/layout/NavBar.jsx";
-import TasksList from "./TasksList.jsx";
+import TasksList from "./dashboard/TasksList.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard({ tasks, filtered, onFiltered, onEdit, onDelete }) {
 
