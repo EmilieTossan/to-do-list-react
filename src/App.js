@@ -46,7 +46,7 @@ function App() {
                         <Dashboard
                             tasks={ tasks }
                             filtered={ filter }
-                            onFiltered={(newFilter) => setFilter(newFilter)}
+                            setFilter={ setFilter }
                             onEdit={ handleEdit }
                             onDelete={ handleDelete }
                          />
@@ -56,10 +56,7 @@ function App() {
                     path="/newtask"
                     element={
                     <Form
-                      onTaskAdded=
-                       {(newTask) =>
-                         setTasks(prevTasks =>
-                           [...prevTasks, newTask])}
+                      setTasks={ setTasks }
                      />}
                  />
                  <Route
@@ -67,12 +64,7 @@ function App() {
                    element={
                      <Form
                        taskToEdit={ taskToEdit }
-                       onTaskUpdated=
-                         {(updatedTask) =>
-                           setTasks(prevTasks =>
-                             prevTasks.map(
-                               task => task.id === updatedTask.id ? updatedTask : task)
-                         )}
+                       setTasks={ setTasks }
                      />}
                 />
             </Routes>

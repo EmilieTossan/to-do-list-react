@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
+export default function Form({ setTasks, taskToEdit }) {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -14,6 +14,18 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
     const [errName, setErrName] = useState("");
     const [errCategory, setErrCategory] = useState("");
     const [errPriority, setErrPriority] = useState("");
+
+    function onTaskAdded(newTask) {
+        setTasks(prevTasks =>
+            [...prevTasks, newTask])
+    }
+
+    function onTaskUpdated(updatedTask) {
+        setTasks(prevTasks =>
+            prevTasks.map(
+              task => task.id === updatedTask.id ? updatedTask : task)
+        )
+    }
 
     const navigate = useNavigate();
 
@@ -47,7 +59,7 @@ export default function Form({ onTaskAdded, taskToEdit, onTaskUpdated }) {
             name,
             description,
             category,
-            date: date,
+            date,
             time,
             priority,
             fulfillment: Number(fulfillment)
