@@ -1,3 +1,4 @@
+import "./taskslist.css";
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -63,13 +64,13 @@ export default function TasksList({ tasks, filter, setTasks, setTaskToEdit }) {
                             <div className="ud-icons-container">
                                 <img
                                     src="/icon/edit.svg"
-                                    alt={`Modifier la tâche ${ task.name }`}
+                                    alt={`Modifier ${ task.name }`}
                                     width={17}
                                     onClick={() => onEdit(task)}
                                  />
                                 <img
                                     src="/icon/delete.svg"
-                                    alt={`Supprimer la tâche ${ task.name }`}
+                                    alt={`Supprimer ${ task.name }`}
                                     width={17}
                                     onClick={() => onDelete(task.id)}
                                  />

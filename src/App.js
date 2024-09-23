@@ -9,8 +9,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [filter, setFilter] = useState("All");
-
-  console.log(filter);
   
   useEffect(() => {
     fetch('http://localhost:3000/tasks')
@@ -42,8 +40,8 @@ function App() {
             <Route
               path="/newtask"
               element={
-              <Form
-                setTasks={ setTasks }
+                <Form
+                  setTasks={ setTasks }
                 />}
               />
             <Route

@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import "./navbar.css";
+import LinkButton from "../shared/LinkButton.jsx";
 import Button from "../shared/Button.jsx";
 
 export default function NavBar({ filter, setFilter }) {
     
   return (
     <div className="buttons-list">
-      <Link to="/newtask" className="main-button">
-          Ajouter une nouvelle to-do
-      </Link>
+      <LinkButton
+        path="/newtask"
+        className="main-button"
+        content="Ajouter une nouvelle to-do"
+      />
       <div>
         <Button
           content="Tout"

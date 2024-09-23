@@ -1,0 +1,46 @@
+.buttons-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+}
+
+.buttons-list > * {
+    width: 80%;
+}
+  
+.buttons-list > :nth-child(1) {
+    margin-right : 50px;
+}
+
+.buttons-list > :nth-child(2) {
+    text-align: right;
+}
+
+.main-button {
+    border: 1px solid black;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .4);
+}
+  
+.main-button:hover {
+    color: white;
+    background-color: rgb(55, 110, 230);
+    border: 1px solid rgb(55, 110, 230);
+    transition: all .3s;
+}
+
+.select-button {
+    width: 25%;
+    margin-left: 15px;
+    border: 0;
+  }
+
+.select-button:hover {
+  color: white;
+  background-color: rgb(55, 110, 230);
+  transition: all .3s;
+}
+
+.active {
+    color: white;
+    background-color: rgb(55, 110, 230);
+  }

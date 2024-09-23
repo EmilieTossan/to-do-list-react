@@ -1,0 +1,42 @@
+h2 {
+    margin-top: 0;
+}
+
+.small-col {
+    width: 15%;
+}
+
+.big-col {
+    width: 35%;
+}
+
+.form-buttons {
+    vertical-align: bottom;
+}
+  
+.form-buttons-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.save-button,
+.cancel-button {
+    width: 45%;
+}
+
+.save-button {
+    color: white;
+    background-color: rgb(55, 110, 230);
+    border: 0;
+}
+
+.cancel-button {
+    border: 1px solid black;
+}
+
+.cancel-button:hover {
+    color: white;
+    background-color: rgb(55, 110, 230);
+    border: 1px solid rgb(55, 110, 230);
+    transition: all .3s;
+  }

@@ -1,0 +1,23 @@
+.tasks > td {
+    text-align: center;
+}
+
+.ud-icons {
+    width: 70px;
+}
+  
+.ud-icons-container > img {
+    margin: 5px;
+    opacity: .5;
+}
+
+.ud-icons-container > img:hover {
+    opacity: 1;
+    transition: opacity .5s;
+    cursor: pointer;
+}
+
+.ud-icons-container {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,9 @@
+input {
+    width: 80%;
+    padding: 5px;
+}
+
+input[type="range"] {
+    margin-left: -2px;
+    width: 98%;
+}

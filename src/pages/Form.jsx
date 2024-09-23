@@ -1,4 +1,7 @@
-import Input from "../components/shared/Input";
+import "./form.css";
+import Input from "../components/shared/input/Input";
+import Textarea from "../components/shared/input/Textarea";
+import Select from "../components/shared/input/Select";
 import Button from "../components/shared/Button"
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -117,7 +120,7 @@ export default function Form({ setTasks, taskToEdit }) {
 
                 fetchTask(
                     "PUT",
-                    `BASE_URL/${taskToEdit.id}`,
+                    `${BASE_URL}/${taskToEdit.id}`,
                     true
                 );
 
@@ -153,50 +156,50 @@ export default function Form({ setTasks, taskToEdit }) {
                         <td>
                             <Input
                                 type="text"
+                                name="name"
                                 placeholder="nommez la tâche que vous allez faire"
                                 value={ task.name }
                                 onChange={ handleInputChange }
-                                error={errors.name }
-                            />
+                                error={ errors.name }
+                             />
                         </td>
                         <td>Priorité :</td>
                         <td>
-                            <select
+                            <Select
                                 value={ task.priority }
+                                name="priority"
                                 onChange={ handleInputChange }
-                            >
-                                <option
-                                    value=""
-                                    disabled
-                                >
-                                    sélectionnez à partir de la liste déroulante
-                                </option>
-                                <option value="Haute">Haute</option>
-                                <option value="Moyenne">Moyenne</option>
-                                <option value="Basse">Basse</option>
-                            </select>
-                            {errors.priority !== "" ? <p className="error-message">{errors.priority}</p> : ""}
+                                placeholder= "sélectionnez à partir de la liste déroulante"
+                                options={[
+                                    { value: "Haute", label: "Haute" },
+                                    { value: "Moyenne", label: "Moyenne" },
+                                    { value: "Basse", label: "Basse" }
+                                ]}
+                                error={ errors.priority }
+                             />
                         </td>
                     </tr>
                     <tr>
                         <td>Description :</td>
                         <td>
-                            <textarea
+                            <Textarea
+                                name="description"
                                 rows="3"
                                 placeholder="décrivez brièvement la tâche (facultative)"
                                 value={ task.description }
                                 onChange={ handleInputChange }
-                            />
+                             />
                         </td>
                         <td>Avancement :</td>
                         <td>
-                            <input
+                            <Input 
                                 type="range"
                                 min="0"
                                 max="100"
+                                name="fulfillment"
                                 value={ task.fulfillment }
                                 onChange={ handleInputChange }
-                            />
+                             />
                         </td>
                     </tr>
                     <tr>
@@ -204,24 +207,25 @@ export default function Form({ setTasks, taskToEdit }) {
                         <td>
                             <Input 
                                 type="text"
+                                name="category"
                                 placeholder="exemples : domestique, école, travail"
                                 value={ task.category }
                                 onChange={ handleInputChange }
                                 error={ errors.category }
-                            />
+                             />
                         </td>
                         <td rowSpan="3" colSpan="2" className="form-buttons">
                             <div className="form-buttons-container">
                                 <Button
                                     content="Enregistrer"
                                     className="save-button"
-                                />
+                                 />
+                                
                                 <Link
-                                    to="/"
+                                    path="/"
                                     className="cancel-button"
-                                >
-                                    Annuler
-                                </Link>
+                                    content="Annuler"
+                                 />
                             </div>
                         </td>
                     </tr>
@@ -230,9 +234,10 @@ export default function Form({ setTasks, taskToEdit }) {
                         <td>
                             <Input
                                 type="date"
+                                name="date"
                                 value={ task.date }
                                 onChange={ handleInputChange }
-                            />
+                             />
                         </td>
                     </tr>
                     <tr>
@@ -240,9 +245,10 @@ export default function Form({ setTasks, taskToEdit }) {
                         <td>
                             <Input
                                 type="time"
+                                name="time"
                                 value={ task.time }
                                 onChange={ handleInputChange }
-                            />
+                             />
                         </td>
                     </tr>
                 </tbody>
