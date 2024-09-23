@@ -29,16 +29,6 @@
       "priority": "Moyenne",
       "fulfillment": 100,
       "id": "8dE5PmA"
-    },
-    {
-      "name": "Nouvelle tâche",
-      "description": "",
-      "category": "Cat 1",
-      "date": "",
-      "time": "",
-      "priority": "Basse",
-      "fulfillment": 0,
-      "id": "C3Sp4sL"
     }
   ]
 }

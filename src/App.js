@@ -20,21 +20,6 @@ function App() {
     })
   }, [])
 
-  const handleEdit = (task) => {
-      setTaskToEdit(task);
-  };
-
-  const handleDelete = (id) => {
-      fetch(`http://localhost:3000/tasks/${id}`, {
-        method: 'DELETE'
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Erreur suppression tâche');
-        setTasks(tasks.filter(task => task.id !== id));
-      })
-      .catch(err => console.error(err));
-  };
-
   return (
       <Router>
         <div className="main">
@@ -45,10 +30,10 @@ function App() {
                     element={
                         <Dashboard
                             tasks={ tasks }
+                            setTasks={ setTasks }
+                            setTaskToEdit={ setTaskToEdit }
                             filtered={ filter }
                             setFilter={ setFilter }
-                            onEdit={ handleEdit }
-                            onDelete={ handleDelete }
                          />
                     }
                  />

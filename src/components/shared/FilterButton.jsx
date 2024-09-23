@@ -1,10 +1,15 @@
-export default function FilterButton({ content, className, newFilter, onFiltered }) {
-    return (
-      <button
-          className={ className }
-          onClick={() => onFiltered(newFilter)}
-      >
-          {content}
-      </button>
-    )
+export default function FilterButton({ content, className, setFilter, filterName}) {
+
+  function onFiltered(newFilter) {
+    setFilter(newFilter)
   }
+  
+  return (
+    <button
+        className={ className }
+        onClick={() => onFiltered(filterName)}
+    >
+        { content }
+    </button>
+  )
+}

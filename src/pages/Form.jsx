@@ -3,17 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Form({ setTasks, taskToEdit }) {
 
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [priority, setPriority] = useState("");
-    const [fulfillment, setFulfillment] = useState(0);
+    const [task, setTask] = useState({
+        name: "",
+        description: "",
+        category: "",
+        date: "",
+        time: "",
+        priority: "",
+        fulfillment: 0
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        const newValue = name === "fulfillment" ? Number(value) : value;
+        setTask(prevTask => ({
+            ...prevTask,
+            [name]: newValue
+        }));
+    };
     
-    const [errName, setErrName] = useState("");
-    const [errCategory, setErrCategory] = useState("");
-    const [errPriority, setErrPriority] = useState("");
+    const [errors, setErrors] = useState({
+        name: "",
+        category: "",
+        priority: ""
+    });
 
     function onTaskAdded(newTask) {
         setTasks(prevTasks =>
@@ -29,43 +42,54 @@ export default function Form({ setTasks, taskToEdit }) {
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if(taskToEdit) {
-            setName(taskToEdit.name);
-            setDescription(taskToEdit.description);
-            setCategory(taskToEdit.category);
-            setDate(taskToEdit.date);
-            setTime(taskToEdit.time);
-            setPriority(taskToEdit.priority);
-            setFulfillment(taskToEdit.fulfillment);
-        }
-    }, [taskToEdit])
+    if(taskToEdit) {
+        useEffect(() => {
+            const {
+                name,
+                description,
+                category,
+                date,
+                time,
+                priority,
+                fulfillment
+            } = taskToEdit;
+            setTask({
+                name,
+                description,
+                category,
+                date,
+                time,
+                priority,
+                fulfillment
+            })
+        }, [taskToEdit])
+    }
 
     const validateForm = (e) => {
 
         e.preventDefault();
 
-        setErrName(() =>
-            name === "" ? "Choisissez un nom pour la to-do" : ""
-        );
-        setErrCategory(() =>
-            category === "" ? "Choisissez une catégorie pour la to-do" : ""
-        );
-        setErrPriority(() =>
-            priority === "" ? "Choisissez une priorité pour la to-do" : ""
-        );
-
-        const taskData = {
-            name,
-            description,
-            category,
-            date,
-            time,
-            priority,
-            fulfillment: Number(fulfillment)
+        const errors = {
+            name: "",
+            category: "",
+            priority: ""
         };
 
-        if (name !== "" && category !== "" && priority !== "") {
+        if (task.name === "") {
+            errors.name = "Choisissez un nom pour la to-do";
+        }
+        if (task.category === "") {
+            errors.category = "Choisissez une catégorie pour la to-do";
+        } 
+        if (task.priority === "") {
+            errors.priority = "Choisissez une priorité pour la to-do";
+        }
+
+        setErrors(errors);
+
+        const taskData = task;
+
+        if (task.name !== "" && task.category !== "" && task.priority !== "") {
 
             if (taskToEdit) {
 
@@ -134,16 +158,16 @@ export default function Form({ setTasks, taskToEdit }) {
                         <input
                             type="text"
                             placeholder="nommez la tâche que vous allez faire"
-                            value={name}
-                            onChange={(e) => setName(() => e.target.value)}
+                            value={ task.name }
+                            onChange={ handleInputChange }
                          />
-                         {errName !== "" ? <p className="error-message">{errName}</p> : ""}
+                         {errors.name !== "" ? <p className="error-message">{errors.name}</p> : ""}
                     </td>
                     <td>Priorité :</td>
                     <td>
                         <select
-                            value={ priority }
-                            onChange={(e) => setPriority(() => e.target.value)}
+                            value={ task.priority }
+                            onChange={ handleInputChange }
                         >
                             <option
                                 value=""
@@ -155,7 +179,7 @@ export default function Form({ setTasks, taskToEdit }) {
                             <option value="Moyenne">Moyenne</option>
                             <option value="Basse">Basse</option>
                         </select>
-                        {errPriority !== "" ? <p className="error-message">{errPriority}</p> : ""}
+                        {errors.priority !== "" ? <p className="error-message">{errors.priority}</p> : ""}
                     </td>
                 </tr>
                 <tr>
@@ -164,8 +188,8 @@ export default function Form({ setTasks, taskToEdit }) {
                         <textarea
                             rows="3"
                             placeholder="décrivez brièvement la tâche (facultative)"
-                            value={ description }
-                            onChange={(e) => setDescription(() => e.target.value)}
+                            value={ task.description }
+                            onChange={ handleInputChange }
                          />
                     </td>
                     <td>Avancement :</td>
@@ -175,8 +199,8 @@ export default function Form({ setTasks, taskToEdit }) {
                             id="rangeInput"
                             min="0"
                             max="100"
-                            value={ fulfillment }
-                            onChange={(e) => setFulfillment(() => e.target.value)}
+                            value={ task.fulfillment }
+                            onChange={ handleInputChange }
                          />
                     </td>
                 </tr>
@@ -186,10 +210,10 @@ export default function Form({ setTasks, taskToEdit }) {
                         <input
                             type="text"
                             placeholder="exemples : domestique, école, travail"
-                            value={ category }
-                            onChange={(e) => setCategory(() => e.target.value)}
+                            value={ task.category }
+                            onChange={ handleInputChange }
                          />
-                        {errCategory !== "" ? <p className="error-message">{errCategory}</p> : ""}
+                        {errors.category !== "" ? <p className="error-message">{errors.category}</p> : ""}
                     </td>
                     <td rowSpan="3" colSpan="2" className="form-buttons">
                         <div className="form-buttons-container">
@@ -203,9 +227,8 @@ export default function Form({ setTasks, taskToEdit }) {
                     <td>
                         <input
                             type="date"
-                            placeholder="dd/mm/aaaa (facultative)"
-                            value={ date }
-                            onChange={(e) => setDate(() => e.target.value)}
+                            value={ task.date }
+                            onChange={ handleInputChange }
                          />
                     </td>
                 </tr>
@@ -214,9 +237,8 @@ export default function Form({ setTasks, taskToEdit }) {
                     <td>
                         <input
                             type="time"
-                            placeholder="hh:mm (facultative)"
-                            value={ time }
-                            onChange={(e) => setTime(() => e.target.value)}
+                            value={ task.time }
+                            onChange={ handleInputChange }
                          />
                     </td>
                 </tr>

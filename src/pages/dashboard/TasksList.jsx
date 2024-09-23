@@ -1,6 +1,30 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
-export default function TasksList({ tasks, onEdit, onDelete }) {
+export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) {
+
+    const onEdit = (task) => {
+        setTaskToEdit(task);
+        useNavigate(`/edittask/${task.id}`);
+    };
+
+    const onDelete = (id) => {
+        fetch(`http://localhost:3000/tasks/${id}`, {
+          method: 'DELETE'
+        })
+        .then(res => {
+          if (!res.ok) throw new Error('Erreur suppression tâche');
+          setTasks(tasks.filter(task => task.id !== id));
+        })
+        .catch(err => console.error(err));
+    };
+
+    const filteredTasks = tasks.filter(task => {
+        if (filtered === "All") return true;
+        if (filtered === "Pending") return task.fulfillment < 100;
+        if (filtered === "Completed") return task.fulfillment === 100;
+        return false;
+    });
 
     return (
         <table>
@@ -16,7 +40,7 @@ export default function TasksList({ tasks, onEdit, onDelete }) {
               </tr>
             </thead>
             <tbody>
-                { tasks.map((task) => (
+                { filteredTasks.map((task) => (
                     <tr className="tasks" id={ task.id }>
                         <td>{ task.name ? task.name : "-" }</td>
                         <td>{ task.description ? task.description : "-" }</td>
@@ -30,7 +54,6 @@ export default function TasksList({ tasks, onEdit, onDelete }) {
                                 </>
                                 : "-" 
                             }
-                            
                         </td>
                         <td>{ task.priority ? task.priority : "-" }</td>
                         <td>{ task.fulfillment }%</td>
