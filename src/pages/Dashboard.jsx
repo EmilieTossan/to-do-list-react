@@ -1,19 +1,19 @@
 import NavBar from "../components/layout/NavBar.jsx";
 import TasksList from "./dashboard/TasksList.jsx";
 
-export default function Dashboard({ filtered, setFilter, tasks, setTasks, setTaskToEdit }) {
+export default function Dashboard({ filter, setFilter, tasks, setTasks, setTaskToEdit }) {
 
     return (
         <>
             <NavBar
-                filtered={ filtered }
+                filter={ filter }
                 setFilter={ setFilter }
              />
             <TasksList
                 tasks={ tasks }
+                filter={ filter }
                 setTasks={ setTasks }
                 setTaskToEdit={ setTaskToEdit }
-                filtered={ filtered }
              />
         </>
     );

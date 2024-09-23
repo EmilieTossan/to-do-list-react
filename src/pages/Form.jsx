@@ -1,4 +1,5 @@
 import Input from "../components/shared/Input";
+import Button from "../components/shared/Button"
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -113,12 +114,15 @@ export default function Form({ setTasks, taskToEdit }) {
             }
 
             if (taskToEdit) {
+
                 fetchTask(
                     "PUT",
                     `BASE_URL/${taskToEdit.id}`,
                     true
                 );
+
             } else {
+
                 fetchTask(
                     "POST",
                     BASE_URL,
@@ -137,102 +141,110 @@ export default function Form({ setTasks, taskToEdit }) {
                     <col className="small-col" />
                     <col className="big-col" />
                 </colgroup>
-            <tbody>
-                <tr>
-                    <td colSpan="4">
-                        <h2>Ajouter une nouvelle do-to :</h2>
-                    </td>
-                </tr>
+                <tbody>
+                    <tr>
+                        <td colSpan="4">
+                            <h2>Ajouter une nouvelle do-to :</h2>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td>Nom :</td>
-                    <td>
-                        <Input
-                            type="text"
-                            placeholder="nommez la tâche que vous allez faire"
-                            value={ task.name }
-                            onChange={ handleInputChange }
-                            error={errors.name }
-                        />
-                    </td>
-                    <td>Priorité :</td>
-                    <td>
-                        <select
-                            value={ task.priority }
-                            onChange={ handleInputChange }
-                        >
-                            <option
-                                value=""
-                                disabled
+                    <tr>
+                        <td>Nom :</td>
+                        <td>
+                            <Input
+                                type="text"
+                                placeholder="nommez la tâche que vous allez faire"
+                                value={ task.name }
+                                onChange={ handleInputChange }
+                                error={errors.name }
+                            />
+                        </td>
+                        <td>Priorité :</td>
+                        <td>
+                            <select
+                                value={ task.priority }
+                                onChange={ handleInputChange }
                             >
-                                sélectionnez à partir de la liste déroulante
-                            </option>
-                            <option value="Haute">Haute</option>
-                            <option value="Moyenne">Moyenne</option>
-                            <option value="Basse">Basse</option>
-                        </select>
-                        {errors.priority !== "" ? <p className="error-message">{errors.priority}</p> : ""}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Description :</td>
-                    <td>
-                        <textarea
-                            rows="3"
-                            placeholder="décrivez brièvement la tâche (facultative)"
-                            value={ task.description }
-                            onChange={ handleInputChange }
-                         />
-                    </td>
-                    <td>Avancement :</td>
-                    <td>
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value={ task.fulfillment }
-                            onChange={ handleInputChange }
-                         />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Catégorie :</td>
-                    <td>
-                        <Input 
-                            type="text"
-                            placeholder="exemples : domestique, école, travail"
-                            value={ task.category }
-                            onChange={ handleInputChange }
-                            error={ errors.category }
-                        />
-                    </td>
-                    <td rowSpan="3" colSpan="2" className="form-buttons">
-                        <div className="form-buttons-container">
-                            <button className="button save-button">Enregistrer</button>
-                            <Link to="/" className="button cancel-button">Annuler</Link>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Date :</td>
-                    <td>
-                        <Input
-                            type="date"
-                            value={ task.date }
-                            onChange={ handleInputChange }
-                        />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Heure :</td>
-                    <td>
-                        <Input
-                            type="time"
-                            value={ task.time }
-                            onChange={ handleInputChange }
-                        />
-                    </td>
-                </tr>
+                                <option
+                                    value=""
+                                    disabled
+                                >
+                                    sélectionnez à partir de la liste déroulante
+                                </option>
+                                <option value="Haute">Haute</option>
+                                <option value="Moyenne">Moyenne</option>
+                                <option value="Basse">Basse</option>
+                            </select>
+                            {errors.priority !== "" ? <p className="error-message">{errors.priority}</p> : ""}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description :</td>
+                        <td>
+                            <textarea
+                                rows="3"
+                                placeholder="décrivez brièvement la tâche (facultative)"
+                                value={ task.description }
+                                onChange={ handleInputChange }
+                            />
+                        </td>
+                        <td>Avancement :</td>
+                        <td>
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={ task.fulfillment }
+                                onChange={ handleInputChange }
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Catégorie :</td>
+                        <td>
+                            <Input 
+                                type="text"
+                                placeholder="exemples : domestique, école, travail"
+                                value={ task.category }
+                                onChange={ handleInputChange }
+                                error={ errors.category }
+                            />
+                        </td>
+                        <td rowSpan="3" colSpan="2" className="form-buttons">
+                            <div className="form-buttons-container">
+                                <Button
+                                    content="Enregistrer"
+                                    className="save-button"
+                                />
+                                <Link
+                                    to="/"
+                                    className="cancel-button"
+                                >
+                                    Annuler
+                                </Link>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date :</td>
+                        <td>
+                            <Input
+                                type="date"
+                                value={ task.date }
+                                onChange={ handleInputChange }
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Heure :</td>
+                        <td>
+                            <Input
+                                type="time"
+                                value={ task.time }
+                                onChange={ handleInputChange }
+                            />
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </form>

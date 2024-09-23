@@ -1,31 +1,31 @@
 import { Link } from "react-router-dom";
-import FilterButton from "../shared/FilterButton.jsx";
+import Button from "../shared/Button.jsx";
 
-export default function NavBar({ filtered, setFilter}) {
+export default function NavBar({ filter, setFilter }) {
     
   return (
     <div className="buttons-list">
-      <Link to="/newtask" className="button main-button">
+      <Link to="/newtask" className="main-button">
           Ajouter une nouvelle to-do
       </Link>
       <div>
-        <FilterButton
+        <Button
           content="Tout"
-          className={`button select-button${filtered === "All" ? " active" : ""}`}
+          className={`select-button${filter === "All" ? " active" : ""}`}
           setFilter={ setFilter }
-          filterName="All"
+          filter="All"
           />
-        <FilterButton
+        <Button
           content="À faire"
-          className={`button select-button${filtered === "Pending" ? " active" : ""}`}
+          className={`select-button${filter === "Pending" ? " active" : ""}`}
           setFilter={ setFilter }
-          filterName="Pending"
+          filter="Pending"
           />
-        <FilterButton
+        <Button
           content="Terminées"
-          className={`button select-button${filtered === "Completed" ? " active" : ""}`}
+          className={`select-button${filter === "Completed" ? " active" : ""}`}
           setFilter={ setFilter }
-          filterName="Completed"
+          filter="Completed"
           />
       </div>
     </div>

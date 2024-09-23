@@ -10,6 +10,8 @@ function App() {
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [filter, setFilter] = useState("All");
 
+  console.log(filter);
+  
   useEffect(() => {
     fetch('http://localhost:3000/tasks')
     .then(res => {
@@ -21,40 +23,41 @@ function App() {
   }, [])
 
   return (
-      <Router>
-        <div className="main">
-            <h1>React To-Do List</h1>
-            <Routes>
-                <Route
-                    path="/"
-                    element={
-                        <Dashboard
-                            tasks={ tasks }
-                            setTasks={ setTasks }
-                            setTaskToEdit={ setTaskToEdit }
-                            filtered={ filter }
-                            setFilter={ setFilter }
-                         />
-                    }
-                 />
-                <Route
-                    path="/newtask"
-                    element={
-                    <Form
-                      setTasks={ setTasks }
-                     />}
-                 />
-                 <Route
-                   path="/edittask/:id"
-                   element={
-                     <Form
-                       taskToEdit={ taskToEdit }
-                       setTasks={ setTasks }
-                     />}
-                />
-            </Routes>
-        </div>
-      </Router>
+    <Router>
+      <div className="main">
+          <h1>React To-Do List</h1>
+          <Routes>
+            <Route
+                path="/"
+                element={
+                  <Dashboard
+                    filter={ filter }
+                    setFilter={ setFilter }
+                    tasks={ tasks }
+                    setTasks={ setTasks }
+                    setTaskToEdit={ setTaskToEdit }
+                    />
+                }
+              />
+            <Route
+              path="/newtask"
+              element={
+              <Form
+                setTasks={ setTasks }
+                />}
+              />
+            <Route
+              path="/edittask/:id"
+              element={
+                <Form
+                  taskToEdit={ taskToEdit }
+                  setTasks={ setTasks }
+                  />
+              }
+              />
+          </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) {
+export default function TasksList({ tasks, filter, setTasks, setTaskToEdit }) {
 
     const filteredTasks = tasks.filter(task => {
-        if (filtered === "All") return true;
-        if (filtered === "Pending") return task.fulfillment < 100;
-        if (filtered === "Completed") return task.fulfillment === 100;
+        if (filter === "All") return true;
+        if (filter === "Pending") return task.fulfillment < 100;
+        if (filter === "Completed") return task.fulfillment === 100;
         return false;
     });
 
@@ -29,26 +29,26 @@ export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) 
     };
 
     return (
-        <table>
+        <table style={{width: "100%", tableLayout: "fixed"}}>
             <thead>
               <tr>
-                <th>Tâche</th>
-                <th>Description</th>
-                <th>Catégorie</th>
-                <th>Date</th>
-                <th>Priorité</th>
-                <th>Avancement</th>
-                <th></th>
+                <th style={{width: "15%"}}>Tâche</th>
+                <th style={{width: "36%"}}>Description</th>
+                <th style={{width: "12%"}}>Catégorie</th>
+                <th style={{width: "10%"}}>Date</th>
+                <th style={{width: "9%"}}>Priorité</th>
+                <th style={{width: "9%"}}>Avancement</th>
+                <th style={{width: "9%"}}></th>
               </tr>
             </thead>
             <tbody>
-                { filteredTasks.map((task) => (
-                    <tr className="tasks" id={ task.id }>
-                        <td>{ task.name ? task.name : "-" }</td>
-                        <td>{ task.description ? task.description : "-" }</td>
-                        <td>{ task.category ? task.category : "-" }</td>
-                        <td>
-                            { task.date ? 
+                { filteredTasks.map((task, index) => (
+                    <tr className="tasks" key={ index }>
+                        <td style={{width: "15%"}}>{ task.name ? task.name : "-" }</td>
+                        <td style={{width: "36%"}}>{ task.description ? task.description : "-" }</td>
+                        <td style={{width: "12%"}}>{ task.category ? task.category : "-" }</td>
+                        <td style={{width: "10%"}}>
+                            { task.date ?
                                 <>
                                     { new Date(task.date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) }
                                     <br />
@@ -57,9 +57,9 @@ export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) 
                                 : "-" 
                             }
                         </td>
-                        <td>{ task.priority ? task.priority : "-" }</td>
-                        <td>{ task.fulfillment }%</td>
-                        <td className="ud-icons">
+                        <td style={{width: "9%"}}>{ task.priority ? task.priority : "-" }</td>
+                        <td style={{width: "9%"}}>{ task.fulfillment }%</td>
+                        <td style={{width: "9%"}} className="ud-icons">
                             <div className="ud-icons-container">
                                 <img
                                     src="/icon/edit.svg"
@@ -78,6 +78,6 @@ export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) 
                     </tr>
                 )) }
             </tbody>
-         </table>
+        </table>
     );
 }

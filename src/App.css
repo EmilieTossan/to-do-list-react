@@ -31,7 +31,7 @@ h2 {
     text-align: right;
 }
 
-.button {
+button, a {
     padding: 12px;
     border-radius: 14px;
     font-size: 18px;
@@ -78,7 +78,6 @@ table {
     padding: 40px;
     width: 100%;
 }
-
 .ud-icons {
     width: 70px;
 }
