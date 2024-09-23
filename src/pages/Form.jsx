@@ -1,3 +1,4 @@
+import Input from "../components/shared/Input";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -42,8 +43,8 @@ export default function Form({ setTasks, taskToEdit }) {
 
     const navigate = useNavigate();
 
-    if(taskToEdit) {
-        useEffect(() => {
+    useEffect(() => {
+        if(taskToEdit) {
             const {
                 name,
                 description,
@@ -62,8 +63,8 @@ export default function Form({ setTasks, taskToEdit }) {
                 priority,
                 fulfillment
             })
-        }, [taskToEdit])
-    }
+        }
+    }, [taskToEdit])
 
     const validateForm = (e) => {
 
@@ -155,13 +156,13 @@ export default function Form({ setTasks, taskToEdit }) {
                 <tr>
                     <td>Nom :</td>
                     <td>
-                        <input
+                        <Input
                             type="text"
                             placeholder="nommez la tâche que vous allez faire"
                             value={ task.name }
                             onChange={ handleInputChange }
-                         />
-                         {errors.name !== "" ? <p className="error-message">{errors.name}</p> : ""}
+                            error={errors.name }
+                        />
                     </td>
                     <td>Priorité :</td>
                     <td>
@@ -196,7 +197,6 @@ export default function Form({ setTasks, taskToEdit }) {
                     <td>
                         <input
                             type="range"
-                            id="rangeInput"
                             min="0"
                             max="100"
                             value={ task.fulfillment }
@@ -207,13 +207,13 @@ export default function Form({ setTasks, taskToEdit }) {
                 <tr>
                     <td>Catégorie :</td>
                     <td>
-                        <input
+                        <Input 
                             type="text"
                             placeholder="exemples : domestique, école, travail"
                             value={ task.category }
                             onChange={ handleInputChange }
-                         />
-                        {errors.category !== "" ? <p className="error-message">{errors.category}</p> : ""}
+                            error={ errors.category }
+                        />
                     </td>
                     <td rowSpan="3" colSpan="2" className="form-buttons">
                         <div className="form-buttons-container">
@@ -225,21 +225,21 @@ export default function Form({ setTasks, taskToEdit }) {
                 <tr>
                     <td>Date :</td>
                     <td>
-                        <input
+                        <Input
                             type="date"
                             value={ task.date }
                             onChange={ handleInputChange }
-                         />
+                        />
                     </td>
                 </tr>
                 <tr>
                     <td>Heure :</td>
                     <td>
-                        <input
+                        <Input
                             type="time"
                             value={ task.time }
                             onChange={ handleInputChange }
-                         />
+                        />
                     </td>
                 </tr>
                 </tbody>

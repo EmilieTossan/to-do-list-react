@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) {
 
+    const navigate = useNavigate();
+
     const onEdit = (task) => {
         setTaskToEdit(task);
-        useNavigate(`/edittask/${task.id}`);
+        navigate(`/edittask/${task.id}`);
     };
 
     const onDelete = (id) => {
