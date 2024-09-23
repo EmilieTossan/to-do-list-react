@@ -1,9 +1,6 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
 
 export default function TasksList({ tasks, onEdit, onDelete }) {
-
-    const navigate = useNavigate();
 
     return (
         <table>
@@ -31,11 +28,13 @@ export default function TasksList({ tasks, onEdit, onDelete }) {
                             <div className="ud-icons-container">
                                 <img
                                     src="/icon/edit.svg"
+                                    alt={`Modifier la tâche ${ task.name }`}
                                     width={17}
                                     onClick={() => onEdit(task)}
                                  />
                                 <img
                                     src="/icon/delete.svg"
+                                    alt={`Supprimer la tâche ${ task.name }`}
                                     width={17}
                                     onClick={() => onDelete(task.id)}
                                  />
