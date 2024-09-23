@@ -93,7 +93,7 @@ export default function Form({ setTasks, taskToEdit }) {
 
             const BASE_URL = "http://localhost:3000/tasks";
 
-            const fetchTask = (method, url, isUpdate) => {
+            const fetchTask = async (method, url, isUpdate) => {
 
                 return fetch (url, {
                     method: method,
