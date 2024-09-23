@@ -41,8 +41,6 @@ export default function Form({ setTasks, taskToEdit }) {
         )
     }
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         if(taskToEdit) {
             const {
@@ -66,6 +64,8 @@ export default function Form({ setTasks, taskToEdit }) {
         }
     }, [taskToEdit])
 
+    const navigate = useNavigate();
+
     const validateForm = (e) => {
 
         e.preventDefault();
@@ -88,50 +88,41 @@ export default function Form({ setTasks, taskToEdit }) {
 
         setErrors(errors);
 
-        const taskData = task;
-
         if (task.name !== "" && task.category !== "" && task.priority !== "") {
 
-            if (taskToEdit) {
+            const BASE_URL = "http://localhost:3000/tasks";
 
-                fetch(`http://localhost:3000/tasks/${taskToEdit.id}`, {
-                    method: "PUT",
-                    headers: {
-                    "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(taskData)
-                })
-                .then(res => {
-                    if (!res.ok) throw new Error("Erreur modification tâche");
-                    return res.json();
-                })
-                .then(updatedTask => {
-                    onTaskUpdated(updatedTask);
-                    navigate('/');
-                })
-                .catch(
-                    err => console.error(err)
-                );
+            const fetchTask = (method, url, isUpdate) => {
 
-            } else {
-
-                fetch('http://localhost:3000/tasks', {
-                    method: "POST",
+                return fetch (url, {
+                    method: method,
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(taskData)
+                    body: JSON.stringify(task)
                 })
                 .then(res => {
-                    if (!res.ok) throw new Error("Erreur ajout tâche");
+                    if (!res.ok) throw new Error(method === "PUT" ? "Erreur modification tâche" : "Erreur ajout tâche");
                     return res.json();
                 })
-                .then(data => {
-                    onTaskAdded(data);
+                .then((task) => {
+                    isUpdate ? onTaskUpdated(task) : onTaskAdded(task);
                     navigate('/');
                 })
-                .catch(
-                    err => console.error(err)
+                .catch(err => console.error(err));
+            }
+
+            if (taskToEdit) {
+                fetchTask(
+                    "PUT",
+                    `BASE_URL/${taskToEdit.id}`,
+                    true
+                );
+            } else {
+                fetchTask(
+                    "POST",
+                    BASE_URL,
+                    false
                 );
             }
         }

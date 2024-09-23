@@ -3,6 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) {
 
+    const filteredTasks = tasks.filter(task => {
+        if (filtered === "All") return true;
+        if (filtered === "Pending") return task.fulfillment < 100;
+        if (filtered === "Completed") return task.fulfillment === 100;
+        return false;
+    });
+
     const navigate = useNavigate();
 
     const onEdit = (task) => {
@@ -20,13 +27,6 @@ export default function TasksList({ tasks, setTasks, setTaskToEdit, filtered }) 
         })
         .catch(err => console.error(err));
     };
-
-    const filteredTasks = tasks.filter(task => {
-        if (filtered === "All") return true;
-        if (filtered === "Pending") return task.fulfillment < 100;
-        if (filtered === "Completed") return task.fulfillment === 100;
-        return false;
-    });
 
     return (
         <table>
