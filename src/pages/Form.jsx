@@ -35,13 +35,15 @@ export default function Form({ setTasks, taskToEdit }) {
 
     function onTaskAdded(newTask) {
         setTasks(prevTasks =>
-            [...prevTasks, newTask])
+            [...prevTasks, newTask]
+        )
     }
 
     function onTaskUpdated(updatedTask) {
         setTasks(prevTasks =>
             prevTasks.map(
-              task => task.id === updatedTask.id ? updatedTask : task)
+                task => task.id === updatedTask.id ? updatedTask : task
+            )
         )
     }
 
@@ -220,7 +222,6 @@ export default function Form({ setTasks, taskToEdit }) {
                                     content="Enregistrer"
                                     className="save-button"
                                  />
-                                
                                 <Link
                                     path="/"
                                     className="cancel-button"

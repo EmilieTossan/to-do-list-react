@@ -34,7 +34,7 @@ function App() {
                     tasks={ tasks }
                     setTasks={ setTasks }
                     setTaskToEdit={ setTaskToEdit }
-                    />
+                   />
                 }
               />
             <Route
@@ -42,17 +42,17 @@ function App() {
               element={
                 <Form
                   setTasks={ setTasks }
-                />}
-              />
+                 />}
+             />
             <Route
               path="/edittask/:id"
               element={
                 <Form
                   taskToEdit={ taskToEdit }
                   setTasks={ setTasks }
-                  />
+                 />
               }
-              />
+             />
           </Routes>
       </div>
     </Router>
